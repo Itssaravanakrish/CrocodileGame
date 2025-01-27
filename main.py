@@ -17,8 +17,8 @@ async def web_server():
     return app
 
 async def main():
-#    application = ApplicationBuilder().token(BOT_TOKEN).build()
-    application = Application(BOT_TOKEN)
+    application = ApplicationBuilder().token(BOT_TOKEN).build()
+#    application = Application(BOT_TOKEN)
     
     if '-r' in sys.argv:
         for user in SUDO_USERS:
@@ -41,7 +41,7 @@ async def main():
         await app.setup()
         bind_address = "0.0.0.0"
         await web.TCPSite(app, bind_address, PORT).start()
-        application.run_polling()
+        application.start_polling()
     except Exception as e:
         print(f"Error: {e}")
         
