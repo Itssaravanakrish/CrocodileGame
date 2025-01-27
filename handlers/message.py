@@ -2,7 +2,7 @@ from telegram import InlineKeyboardButton
 from telegram import InlineKeyboardMarkup
 from telegram import Update
 from telegram.ext import CallbackContext
-from telegram.ext import Filters
+from telegram.ext import filters
 from telegram.ext import MessageHandler
 
 import mongo.users as db
@@ -41,6 +41,6 @@ def callback(update: Update, context: CallbackContext):
 
 
 handler = MessageHandler(
-    Filters.text & ~Filters.command & Filters.chat_type.supergroup,
+    filters.text & ~filters.command & filters.chat_type.supergroup,
     callback,
 )
