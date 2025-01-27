@@ -1,4 +1,4 @@
-from telegram.ext import Defaults, Updater
+from telegram.ext import Defaults, Updater, Dispatcher
 from config import BOT_TOKEN, PORT
 from config import SUDO_USERS
 import os
@@ -6,7 +6,6 @@ import sys
 from threading import Thread
 from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
-from telegram.ext.updater import Dispatcher
 from handlers import add_handlers
 from helpers.filters import sudo_only
 import asyncio
