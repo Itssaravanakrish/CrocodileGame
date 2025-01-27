@@ -45,4 +45,4 @@ async def main():
         print(f"Error: {e}")
         
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
