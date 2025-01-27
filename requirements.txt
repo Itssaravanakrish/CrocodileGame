@@ -1,6 +1,6 @@
 aiohttp
 pyrogram
-dnspython==2.2.1
-pymongo==4.3.3
-python-dotenv==0.20.0
-python-telegram-bot==20.0
+dnspython
+pymongo
+python-dotenv
+python-telegram-bot
