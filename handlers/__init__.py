@@ -1,4 +1,5 @@
-from telegram.ext import Defaults, Updater
+from telegram import Update
+from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, Application
 from . import abort
 from . import host
 from . import message
@@ -17,7 +18,7 @@ HANDLERS = [
     view.handler,
 ]
 
-def add_handlers(dp: Dispatcher) -> None:
-    """Add handlers to the dispatcher."""
+def add_handlers(application: Application) -> None:
+    """Add handlers to the application."""
     for handler in HANDLERS:
-        dp.add_handler(handler)
+        application.add_handler(handler)
