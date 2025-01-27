@@ -29,9 +29,9 @@ async def main():
     
     def stop_and_restart(chat, msg):
         application.stop()
-        os.execl(sys.executable, sys.executable, *sys.argv, '-r', f'{chat}_{msg}')
+        os.execl(sys.argv[0], *sys.argv)
     
-    application.add_handler(CommandHandler('r', restart, sudo_only))
+    application.add_handler(CommandHandler('r', restart, sudo_anon))
     add_handlers(application)
     
     try:
@@ -43,8 +43,6 @@ async def main():
         asyncio.create_task(application.run_polling(drop_pending_updates=True))
     except Exception as e:
         print(f"Error: {e}")
-    finally:
-        await application.idle()
 
 if __name__ == '__main__':
     asyncio.run(main())
