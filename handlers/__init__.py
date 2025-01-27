@@ -1,4 +1,4 @@
-from telegram.ext import Defaults, Updater, Dispatcher
+from telegram.ext import Defaults, Updater
 
 from . import abort
 from . import host
