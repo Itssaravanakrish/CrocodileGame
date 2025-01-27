@@ -17,7 +17,8 @@ async def web_server():
     return app
 
 async def main():
-    application = ApplicationBuilder().token(BOT_TOKEN).build()
+#    application = ApplicationBuilder().token(BOT_TOKEN).build()
+    application = Application(BOT_TOKEN)
     
     if '-r' in sys.argv:
         for user in SUDO_USERS:
