@@ -5,7 +5,8 @@ import os
 import sys
 from threading import Thread
 from telegram import Update
-from telegram.ext import CallbackContext, CommandHandler, Dispatcher
+from telegram.ext import CallbackContext, CommandHandler
+from telegram import Dispatcher
 from handlers import add_handlers
 from helpers.filters import sudo_only
 import asyncio
