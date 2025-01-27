@@ -44,4 +44,5 @@ async def main():
     except Exception as e:
         print(f"Error: {e}")
         
-await main()
+if name == 'main':
+    asyncio.run(main())
