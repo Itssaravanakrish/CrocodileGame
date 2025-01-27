@@ -18,28 +18,31 @@ async def web_server():
 
 async def main():
     application = ApplicationBuilder().token(BOT_TOKEN).build()
-
+    
     if '-r' in sys.argv:
         for user in SUDO_USERS:
             application.bot.send_message(user, 'Restarted.')
-
+    
     async def restart(update: Update, context: ContextTypes.DEFAULT_TYPE):
         update.effective_message.reply_text('Restarting...')
         Thread(target=stop_and_restart, args=(update.effective_chat.id, update.effective_message.message_id,)).start()
-
+    
     def stop_and_restart(chat, msg):
         application.stop()
-        os.execl(sys.executable, sys.executable, *sys.argv, '-r', f'{chat}_{msg}', )
-
+        os.execl(sys.executable, sys.executable, *sys.argv, '-r', f'{chat}_{msg}')
+    
     application.add_handler(CommandHandler('r', restart, sudo_only))
     add_handlers(application)
-
-    app = web.AppRunner(await web_server())
-    await app.setup()
-    bind_address = "0.0.0.0"
-    await web.TCPSite(app, bind_address, PORT).start()
-
-    application.run_polling(drop_pending_updates=True)
+    
+    try:
+        app = web.AppRunner(await web_server())
+        await app.setup()
+        bind_address = "0.0.0.0"
+        await web.TCPSite(app, bind_address, PORT).start()
+        application.run_polling(drop_pending_updates=True)
+    except Exception as e:
+        print(f"Error: {e}")
 
 if __name__ == '__main__':
     asyncio.run(main())
+
