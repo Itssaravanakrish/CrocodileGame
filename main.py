@@ -17,7 +17,7 @@ async def web_server():
     return app
 
 async def main():
-    application = Application.builder().token(BOT_TOKEN).build()
+    application = ApplicationBuilder().token(BOT_TOKEN).build()
     if '-r' in sys.argv:
         for user in SUDO_USERS:
             application.bot.send_message(user, 'Restarted.')
