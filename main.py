@@ -40,11 +40,11 @@ async def main():
         await app.setup()
         bind_address = "0.0.0.0"
         await web.TCPSite(app, bind_address, PORT).start()
-        await application.run_polling(drop_pending_updates=True)
+        asyncio.create_task(application.run_polling(drop_pending_updates=True))
     except Exception as e:
         print(f"Error: {e}")
     finally:
-        await application.stop()
+        await application.idle()
 
 if __name__ == '__main__':
     asyncio.run(main())
