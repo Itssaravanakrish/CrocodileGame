@@ -1,5 +1,5 @@
-from telegram.ext import Defaults, Updater
-
+# from telegram.ext import Defaults, Updater
+from telegram.ext import Defaults, Dispatcher, Updater
 from . import abort
 from . import host
 from . import message
@@ -8,12 +8,17 @@ from . import scores
 from . import start
 from . import view
 
+HANDLERS = [
+    abort.handler,
+    host.handler,
+    message.handler,
+    next.handler,
+    scores.handler,
+    start.handler,
+    view.handler,
+]
 
-def add_handlers(dp: Dispatcher):
-    dp.add_handler(abort.handler)
-    dp.add_handler(host.handler)
-    dp.add_handler(message.handler)
-    dp.add_handler(next.handler)
-    dp.add_handler(scores.handler)
-    dp.add_handler(start.handler)
-    dp.add_handler(view.handler)
+def add_handlers(dp: Dispatcher) -> None:
+    """Add handlers to the dispatcher."""
+    for handler in HANDLERS:
+        dp.add_handler(handler)
