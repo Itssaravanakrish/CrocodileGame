@@ -41,6 +41,6 @@ def callback(update: Update, context: CallbackContext):
 
 
 handler = MessageHandler(
-    filters.text & ~filters.command & filters.chat_type.supergroup,
+    filters.TEXT & ~filters.COMMAND & filters.ChatType.SUPERGROUP,
     callback,
 )
