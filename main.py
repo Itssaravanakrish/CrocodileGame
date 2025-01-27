@@ -1,14 +1,11 @@
-from telegram.ext import Defaults, Updater, Dispatcher
-from config import BOT_TOKEN, PORT
-from config import SUDO_USERS
-import os
-import sys
+from telegram.ext import Defaults, Updater
+from config import BOT_TOKEN, PORT, SUDO_USERS
+import os, sys, asyncio
 from threading import Thread
 from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
 from handlers import add_handlers
 from helpers.filters import sudo_only
-import asyncio
 from aiohttp import web
 
 async def web_server():
@@ -28,7 +25,7 @@ async def main():
     )
 
     updater = Updater(token=BOT_TOKEN, defaults=defaults)
-    dp: Dispatcher = updater.dispatcher
+    dp = updater.dispatcher  # Use the dispatcher attribute of the Updater instance
 
     if '-r' in sys.argv:
         for user in SUDO_USERS:
@@ -47,7 +44,6 @@ async def main():
 
     app = web.AppRunner(await web_server())
     await app.setup()
-
     bind_address = "0.0.0.0"
     await web.TCPSite(app, bind_address, PORT).start()
 
