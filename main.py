@@ -31,7 +31,7 @@ async def main():
         application.stop()
         os.execl(sys.argv[0], *sys.argv)
     
-    application.add_handler(CommandHandler('r', restart, sudo_anon))
+    application.add_handler(CommandHandler('r', restart, sudo_only))
     add_handlers(application)
     
     try:
