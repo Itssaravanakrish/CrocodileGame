@@ -35,13 +35,13 @@ async def main():
     add_handlers(application)
     
     try:
-        await application.start_polling()
+        await application.start()
         app = web.AppRunner(await web_server())
         await app.setup()
         bind_address = "0.0.0.0"
         await web.TCPSite(app, bind_address, PORT).start()
+        application.run_polling()
     except Exception as e:
         print(f"Error: {e}")
-
 if __name__ == '__main__':
     asyncio.run(main())
