@@ -8,6 +8,7 @@ from telegram.ext import MessageHandler
 import mongo.users as db
 from helpers.game import get_game
 from helpers.game import is_true
+from helpers.wrappers import nice_errors
 
 # Define inline keyboard markup as a separate variable
 inline_keyboard_markup = InlineKeyboardMarkup(
