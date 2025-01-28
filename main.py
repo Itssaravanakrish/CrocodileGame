@@ -37,8 +37,8 @@ async def main():
         await application.run_polling()
     except Exception as e:
         print(f"Error: {e}")
-    finally:
-        await application.shutdown()
+#    finally:
+#        await application.shutdown()
 
 if __name__ == "__main__":
     loop = asyncio.new_event_loop()
