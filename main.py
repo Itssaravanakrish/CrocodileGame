@@ -30,7 +30,7 @@ async def main():
     application.add_handler(CommandHandler('r', restart, sudo_only))
     add_handlers(application)
     try:
-        await application.start_polling()
+        await application.run_polling()
         app = web.AppRunner(await web_server())
         await app.setup()
         bind_address = "0.0.0.0"
