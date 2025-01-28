@@ -41,4 +41,7 @@ async def main():
         await application.shutdown()
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except Exception as e:
+        print(f"Error: {e}")
