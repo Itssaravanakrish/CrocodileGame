@@ -30,13 +30,15 @@ async def main():
     application.add_handler(CommandHandler('r', restart, sudo_only))
     add_handlers(application)
     try:
-        await application.run_polling()
         app = web.AppRunner(await web_server())
         await app.setup()
         bind_address = "0.0.0.0"
         await web.TCPSite(app, bind_address, PORT).start()
+        await application.run_polling()
     except Exception as e:
         print(f"Error: {e}")
+    finally:
+        await application.shutdown()
 
 if __name__ == "__main__":
     asyncio.run(main())
