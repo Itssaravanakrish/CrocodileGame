@@ -17,8 +17,6 @@ async def web_server():
     return app
 
 async def main():
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
     application = ApplicationBuilder().token(BOT_TOKEN).build()
     if '-r' in sys.argv:
         for user in SUDO_USERS:
@@ -41,8 +39,13 @@ async def main():
         print(f"Error: {e}")
     finally:
         await application.shutdown()
-        loop.stop()
-        loop.close()
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    try:
+        loop.run_until_complete(main())
+    except Exception as e:
+        print(f"Error: {e}")
+#    finally:
+  #      loop.close()
